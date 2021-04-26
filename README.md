@@ -14,21 +14,23 @@ dig +short chaos txt cachesize.bind
 
 Download the repo somewhere
 
-    $ git clone git@github.com:machinly/dnsmasq-telegraf-plugin.git dnsmasq-telegraf-plugin
+    $ git clone git@github.com:machinly/dnsmasq-telegraf-plugin.git dnsmasq-tp
 
-build the "dnsmasq-telegraf-plugin" binary
+build the "dnsmasq-tp" binary
 
-    $ go build -o dnsmasq-telegraf-plugin cmd/main.go
+    $ go build -o dnsmasq-tp cmd/main.go
     
  (if you're using windows, you'll want to give it an .exe extension)
  
-    go build -o dnsmasq-telegraf-plugin.exe cmd/main.go
+    go build -o dnsmasq-tp.exe cmd/main.go
 
 You should be able to call this from telegraf now using execd:
 
 ```
 [[inputs.execd]]
-  command = ["/path/to/dnsmasq-telegraf-plugin_binary"]
+  command = ["/path/to/dnsmasq-tp_binary"]
+  # for using plugin
+  # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf"]
   signal = "none"
   
 # sample output: write metrics to stdout
@@ -37,7 +39,7 @@ You should be able to call this from telegraf now using execd:
 ```
 
 
-### Configuration:
+# Plugin Configuration:
 ```toml
 # Read metrics about dnsmasq dns side.
 [[inputs.dnsmasq]]
@@ -48,7 +50,7 @@ You should be able to call this from telegraf now using execd:
   port = 53
 ```
 
-### Metrics:
+# Metrics:
 
 - dnsmasq
   - tags:
@@ -63,7 +65,7 @@ You should be able to call this from telegraf now using execd:
 	- queries (float)
 	- queries_failed (float)
 
-### Example Output:
+# Example Output:
 
 ```
 dnsmasq,host=localhost,server=127.0.0.1,port=53 insertions=0,evictions=0,misses=0,hits=12,auth=0,queries=0,queries_failed=0,cachesize=150 1598519060000000000
