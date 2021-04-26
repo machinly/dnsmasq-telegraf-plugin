@@ -1,6 +1,6 @@
-# Telegraf execd dnsmasq input
+# Dnsmasq Input Plugin
 
-This is a dnsmasq statistics input plugin for Telegraf, meant to be compiled separately and used externally with telegraf's execd input plugin. 
+The Dnsmasq plugin gathers Dnsmasq statistics about DNS side.
 
 See "cache statistics" section in [https://manpages.debian.org/stretch/dnsmasq-base/dnsmasq.8.en.html#NOTES](https://manpages.debian.org/stretch/dnsmasq-base/dnsmasq.8.en.html#NOTES)
 
@@ -8,32 +8,6 @@ An example command to query this, using the dig utility would be
 
 ``` shell
 dig +short chaos txt cachesize.bind
-```
-
-# Install Instructions
-
-Download the repo somewhere
-
-    $ git clone git@github.com:machinly/dnsmasq-telegraf-plugin.git dnsmasq-telegraf-plugin
-
-build the "dnsmasq-telegraf-plugin" binary
-
-    $ go build -o dnsmasq-telegraf-plugin cmd/main.go
-    
- (if you're using windows, you'll want to give it an .exe extension)
- 
-    go build -o dnsmasq-telegraf-plugin.exe cmd/main.go
-
-You should be able to call this from telegraf now using execd:
-
-```
-[[inputs.execd]]
-  command = ["/path/to/dnsmasq-telegraf-plugin_binary"]
-  signal = "none"
-  
-# sample output: write metrics to stdout
-[[outputs.file]]
-  files = ["stdout"]
 ```
 
 
