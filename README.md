@@ -31,6 +31,9 @@ You should be able to call this from telegraf now using execd:
   command = ["/path/to/dnsmasq-tp_binary"]
   # for using plugin
   # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf"]
+  # for using with custom scraping interval (there also exists a parameter called "pollIntervalDisabled")
+  # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf" "-pollInterval", "30s"]
+
   signal = "none"
   
 # sample output: write metrics to stdout
@@ -43,11 +46,9 @@ You should be able to call this from telegraf now using execd:
 ```toml
 # Read metrics about dnsmasq dns side.
 [[inputs.dnsmasq]]
-  # Dnsmasq server IP address.
-  server = "127.0.0.1"
-  
-  # Dnsmasq server port.
-  port = 53
+  # Dnsmasq server IP address and port.
+  server = "127.0.0.1:53"
+
 ```
 
 # Metrics:
