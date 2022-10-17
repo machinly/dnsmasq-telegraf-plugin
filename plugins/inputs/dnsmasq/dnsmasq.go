@@ -22,19 +22,13 @@ const (
 type Dnsmasq struct {
 	c *dns.Client
 
-	// Dnsmasq server IP address
+	// Dnsmasq server IP address and port
 	Server string
-
-	// Dnsmasq server port
-	Port int
 }
 
 var sampleConfig = `
-  ## Dnsmasq server IP address.
-  # server = "127.0.0.1"
-  #
-  ## Dnsmasq server port.
-  # port = 53
+  ## Dnsmasq server IP address and port.
+  # server = "127.0.0.1:53"
 `
 
 func (d *Dnsmasq) SampleConfig() string {
@@ -49,8 +43,7 @@ func (d *Dnsmasq) Gather(acc telegraf.Accumulator) error {
 	d.setDefaultValues()
 	fields := make(map[string]interface{}, 2)
 	tags := map[string]string{
-		"server": d.Server,
-		"port":   fmt.Sprint(d.Port),
+		"server": d.Server
 	}
 	msg := &dns.Msg{
 		MsgHdr: dns.MsgHdr{
@@ -115,10 +108,7 @@ func (d *Dnsmasq) Gather(acc telegraf.Accumulator) error {
 
 func (d *Dnsmasq) setDefaultValues() {
 	if d.Server == "" {
-		d.Server = "127.0.0.1"
-	}
-	if d.Port == 0 {
-		d.Port = 53
+		d.Server = "127.0.0.1:53"
 	}
 }
 
