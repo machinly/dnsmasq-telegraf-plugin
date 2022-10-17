@@ -32,7 +32,7 @@ You should be able to call this from telegraf now using execd:
   # for using plugin
   # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf"]
   # for using with custom scraping interval (there also exists a parameter called "pollIntervalDisabled")
-  # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf" "-pollInterval", "30s"]
+  # command = ["/path/to/dnsmasq-tp_binary", "-config", "/path/to/plugin.conf", "-pollInterval", "30s"]
 
   signal = "none"
   
@@ -69,5 +69,5 @@ You should be able to call this from telegraf now using execd:
 # Example Output:
 
 ```
-dnsmasq,host=localhost,server=127.0.0.1,port=53 insertions=0,evictions=0,misses=0,hits=12,auth=0,queries=0,queries_failed=0,cachesize=150 1598519060000000000
+dnsmasq,host=localhost,server=127.0.0.1:53 insertions=0,evictions=0,misses=0,hits=12,auth=0,queries=0,queries_failed=0,cachesize=150 1598519060000000000
 ```
