@@ -43,7 +43,7 @@ func (d *Dnsmasq) Gather(acc telegraf.Accumulator) error {
 	d.setDefaultValues()
 	fields := make(map[string]interface{}, 2)
 	tags := map[string]string{
-		"server": d.Server
+		"server": d.Server,
 	}
 	msg := &dns.Msg{
 		MsgHdr: dns.MsgHdr{
